@@ -72,15 +72,11 @@ const StockerOrderList= () => {
     //   // valueType: 'date',
     // },
     {
-      title: 'id',
-      dataIndex: 'orderId',
-    },
-    {
       title: '',
       dataIndex: 'orderDst',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
-          {record.orderDst=="buy"?"买入":"卖出"}
+          {record.orderId+" " + (record.orderDst=="buy"?"买入":"卖出")}
         </p>
       ],
     },

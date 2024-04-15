@@ -29,7 +29,7 @@ const FinishedTradeList = ()=> {
       // key: 'orderState',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
-          {username==record.buyerName?record.buyerId:record.sellerId}
+          {username==record.buyerName?(record.buyerId+" 买入"):(record.sellerId+" 卖出")}
         </p>
       ],
     },
@@ -39,47 +39,73 @@ const FinishedTradeList = ()=> {
       // key: 'orderState',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
-          {username==record.buyerName?record.buyerName:record.sellerName}
+          {username==record.buyerName?record.sellerName:record.buyerName}
         </p>
       ],
     },
     {
       title: '成交量',
       dataIndex: 'qty',
-      key: 'qty',
+      // key: 'qty',
     },
     {
       title: '成交价',
       dataIndex: 'price',
-      key: 'price',
+      // key: 'price',
     },
     {
       title: '产品名',
       dataIndex: 'productName',
-      key: 'productName',
+      // key: 'productName',
     },
   ];
   return (
     <ProTable<API.FinishedTradeListItem>
+      columns={columns}
+      // actionRef={actionRef}
+      // cardBordered
+      request={async (params, sort, filter) => {
+        var _id = window.localStorage.getItem("userid")
+        if(!_id) {
     
-    search={false}
-    columns={columns}
-  // params 是需要自带的参数
-  // 这个参数优先级更高，会覆盖查询表单的参数
-  // params={params}
-  request={async (params, sort, filter) => {
-    var _id = window.localStorage.getItem("userid")
-    if(!_id) {
-
-    }
-    const values ={userid:parseInt(_id as string)} as API.UseridParams
-
-    const msg = await getFinishedTradeHist(values, params);
-    console.log(typeof(msg))
-    console.log(msg)
-    return msg 
-  }}
-/>
+        }
+        const values ={userid: parseInt(_id as string)} as API.UseridParams
+    
+        const msg = await getFinishedTradeHist(values, params);
+        console.log(typeof(msg))
+        console.log(msg)
+        return msg
+      }}
+      // editable={{
+      //   type: 'multiple',
+      // }}
+      columnsState={{
+        persistenceKey: 'pro-table-singe-demos',
+        persistenceType: 'localStorage',
+        defaultValue: {
+          option: { fixed: 'right', disable: true },
+        },
+        onChange(value) {
+          console.log('value: ', value);
+        },
+      }}
+      // rowKey="id"
+      // search={{
+      //   labelWidth: 'auto',
+      // }}
+      search={false}
+      options={{
+        setting: {
+          listsHeight: 400,
+        },
+      }}
+      // form=
+      pagination={{
+        pageSize: 5,
+        onChange: (page) => console.log(page),
+      }}
+      dateFormatter="string"
+    />
   );
 }
 
