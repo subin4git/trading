@@ -97,7 +97,7 @@ const StockerOrderList= () => {
 
     {
       title: '初始数量',
-      dataIndex: 'origQty',
+      dataIndex: 'originVol',
       // key: 'qty',
     },
     {

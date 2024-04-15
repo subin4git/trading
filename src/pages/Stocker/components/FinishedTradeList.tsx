@@ -16,33 +16,33 @@ import { FormattedMessage, history, SelectLang, useIntl, useModel, Helmet } from
 
 const FinishedTradeList = ()=> {
   const username = window.localStorage.getItem("username");
-  const _columns: ProColumns[] = [
+  const columns: ProColumns[] = [
     // {
     //   title: '时间戳',
     //   dataIndex: 'time',
     //   key: 'time',
     // },
    
-    // {
-    //   title: 'id',
-    //   dataIndex: 'buyerId',
-    //   // key: 'orderState',
-    //   render: (text, record, _, action) => [
-    //     <p style={{display:"inline"}}>
-    //       {username==record.buyerName?record.buyerId:record.sellerId}
-    //     </p>
-    //   ],
-    // },
-    // {
-    //   title: '买/卖家',
-    //   dataIndex: 'buyerName',
-    //   // key: 'orderState',
-    //   render: (text, record, _, action) => [
-    //     <p style={{display:"inline"}}>
-    //       {username==record.buyerName?record.buyerName:record.sellerName}
-    //     </p>
-    //   ],
-    // },
+    {
+      title: 'id',
+      dataIndex: 'buyerId',
+      // key: 'orderState',
+      render: (text, record, _, action) => [
+        <p style={{display:"inline"}}>
+          {username==record.buyerName?record.buyerId:record.sellerId}
+        </p>
+      ],
+    },
+    {
+      title: '买/卖家',
+      dataIndex: 'buyerName',
+      // key: 'orderState',
+      render: (text, record, _, action) => [
+        <p style={{display:"inline"}}>
+          {username==record.buyerName?record.buyerName:record.sellerName}
+        </p>
+      ],
+    },
     {
       title: '成交量',
       dataIndex: 'qty',
@@ -63,7 +63,7 @@ const FinishedTradeList = ()=> {
     <ProTable<API.FinishedTradeListItem>
     
     search={false}
-    columns={_columns}
+    columns={columns}
   // params 是需要自带的参数
   // 这个参数优先级更高，会覆盖查询表单的参数
   // params={params}
