@@ -46,6 +46,7 @@ const FinishedTradeList = ()=> {
     {
       title: '',
       dataIndex: 'buyerId',
+      key: 'buyerId',
       // key: 'orderState',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
@@ -56,6 +57,7 @@ const FinishedTradeList = ()=> {
     {
       title: '买/卖家',
       dataIndex: 'buyerName',
+      key: 'buyerName',
       // key: 'orderState',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
@@ -66,17 +68,17 @@ const FinishedTradeList = ()=> {
     {
       title: '成交量',
       dataIndex: 'qty',
-      // key: 'qty',
+      key: 'qty',
     },
     {
       title: '成交价',
       dataIndex: 'price',
-      // key: 'price',
+      key: 'price',
     },
     {
       title: '产品名',
       dataIndex: 'productName',
-      // key: 'productName',
+      key: 'productName',
     },
   ];
   return (

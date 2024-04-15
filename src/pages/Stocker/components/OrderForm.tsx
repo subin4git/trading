@@ -129,16 +129,8 @@ import PubSub from 'pubsub-js'
                     label: 'gold',
                   },
                   {
-                    value: 'product B',
-                    label: 'product B',
-                  },
-                  {
-                    value: 'product C',
-                    label: 'product C',
-                  },
-                  {
-                    value: 'product D',
-                    label: 'product D',
+                    value: 'oil',
+                    label: 'oil',
                   },
                 ]}
                 width="sm"

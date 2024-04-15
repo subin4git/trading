@@ -20,19 +20,11 @@ const _columns: ProColumns[] = [
     title: '卖家',
     dataIndex: 'sellerName',
     key: 'sellerName',
-
-    onFilter: (value, record) => record.sell_order_id === value,
-    sorter: (a, b) => a.sell_order_id - b.sell_order_id,
-    sortDirections: ['descend'],
   },
   {
     title: '买家',
     dataIndex: 'buyerName',
     key: 'buyerName',
-
-    onFilter: (value, record) => record.buy_order_id === value,
-    sorter: (a, b) => a.buy_order_id - b.buy_order_id,
-    sortDirections: ['descend'],
   },
   {
     title: '成交量',

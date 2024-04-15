@@ -141,8 +141,8 @@ const Login: React.FC = () => {
       // 如果失败去设置用户错误信息
       setUserLoginState(msg);
       const defaultLoginFailureMessage = intl.formatMessage({
-        id: 'pages.login.failure',
-        defaultMessage: '登录失败，请重试！',
+        id: 'pages.login.failureDetail',
+        defaultMessage: msg.status,
       });
       message.error(defaultLoginFailureMessage);
     } catch (error) {
@@ -154,7 +154,7 @@ const Login: React.FC = () => {
       message.error(defaultLoginFailureMessage);
     }
   };
-  const { status : loginType } = userLoginState;
+  const { status : status } = userLoginState;
 
   return (
     <div className={styles.container}>
@@ -219,14 +219,7 @@ const Login: React.FC = () => {
             ]}
           />
 
-          {status === 'error' && (
-            <LoginMessage
-              content={intl.formatMessage({
-                id: 'pages.login.accountLogin.errorMessage',
-                defaultMessage: '账户或密码错误',
-              })}
-            />
-          )}
+        
           {type === 'stocker' && (
             <>
               <ProFormText

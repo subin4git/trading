@@ -20,38 +20,6 @@ export const waitTimePromise = async (time: number = 100) => {
 };
 
 
-const defaultData = [
-  {
-    time: "string",
-  orderDst: "sell",
-  orderType: "limit",
-  orderState:"pending",
-  qty: 10,
-  price: 10,
-  productName:"1",
-  product_id:1,
-  },
-  {
-    time: "string",
-  orderDst: "buy",
-  orderType: "market",
-  orderState:"finished",
-  qty: 10,
-  price: 10,
-  productName:"2",
-  product_id:1,
-  },
-  {
-    time: "string",
-  orderDst: "buy",
-  orderType: "market",
-  orderState:"canceled",
-  qty: 10,
-  price: 10,
-  productName:"2",
-  product_id:1,
-  },
-];
 
 export const waitTime = async (time: number = 100) => {
   await waitTimePromise(time);
@@ -88,31 +56,31 @@ const StockerOrderList= () => {
     {
       title: '订单类型',
       dataIndex: 'orderType',
-      // key:'orderType',
+      key:'orderType',
     },
 
     {
       title: '初始数量',
       dataIndex: 'originVol',
-      // key: 'qty',
+      key: 'originVol',
     },
     {
       title: '当前数量',
       dataIndex: 'qty',
-      // key: 'qty',
+      key: 'qty',
     },
     
     {
       title: '价格',
       dataIndex: 'price',
-      // key: 'price',
+      key: 'price',
     },
     
   
     {
       title: '状态',
       dataIndex: 'orderState',
-      // key: 'orderState',
+      key: 'orderState',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
           {record.orderType=="cancel"?"已取消":record.orderIsDone?"已完成":"进行中"}
