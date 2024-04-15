@@ -1,5 +1,5 @@
 
-import {ProTable,ProColumns} from '@ant-design/pro-components';
+import {ActionType,ProTable,ProColumns} from '@ant-design/pro-components';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
@@ -10,11 +10,31 @@ import { Alert, message, Tabs } from 'antd';
 import { FormattedMessage, history, SelectLang, useIntl, useModel, Helmet } from '@umijs/max';
 
 
-
+import React from 'react';
+import PubSub from 'pubsub-js'
 
 
 
 const FinishedTradeList = ()=> {
+  const actionRef = useRef<ActionType>();
+
+  const callback = () => {
+		actionRef.current?.reload()
+	}
+
+	// 类似于类组件中的 componentDidMount
+	React.useEffect(() => {
+		PubSub.subscribe("reloadHistTable", callback);
+	}, []);
+
+	// 类似于类组价中 componentWillUnmout
+	React.useEffect(() => {
+		// 组件卸载移除监听
+		return () => {
+			PubSub.unsubscribe()
+		}
+	});
+
   const username = window.localStorage.getItem("username");
   const columns: ProColumns[] = [
     // {
@@ -62,7 +82,7 @@ const FinishedTradeList = ()=> {
   return (
     <ProTable<API.FinishedTradeListItem>
       columns={columns}
-      // actionRef={actionRef}
+      actionRef={actionRef}
       // cardBordered
       request={async (params, sort, filter) => {
         var _id = window.localStorage.getItem("userid")
