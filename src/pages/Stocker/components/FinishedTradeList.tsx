@@ -24,12 +24,12 @@ const FinishedTradeList = ()=> {
     // },
    
     {
-      title: 'id',
+      title: '',
       dataIndex: 'buyerId',
       // key: 'orderState',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
-          {username==record.buyerName?(record.buyerId+" 买入"):(record.sellerId+" 卖出")}
+          {username==record.buyerName?("订单"+record.buyerId+" 买入"):(record.sellerId+" 卖出")}
         </p>
       ],
     },

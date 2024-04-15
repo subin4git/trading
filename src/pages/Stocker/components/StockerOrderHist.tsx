@@ -76,7 +76,7 @@ const StockerOrderList= () => {
       dataIndex: 'orderDst',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
-          {record.orderId+" " + (record.orderDst=="buy"?"买入":"卖出")}
+          {"订单"+record.orderId+" " + (record.orderDst=="buy"?"买入":"卖出")}
         </p>
       ],
     },
