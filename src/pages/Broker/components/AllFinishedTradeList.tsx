@@ -5,7 +5,7 @@ import type { ColumnsType } from 'antd/es/table';
 
 import { useRef } from 'react';
 import { request } from '@umijs/max';
-import { getStockerOrderHist, cancelOrder, getPendingOrderHist, getFinishedTradeHist } from '@/services/ant-design-pro/api';
+import { getStockerOrderHist, cancelOrder, getPendingOrderHist, getAllFinishedTradeHist } from '@/services/ant-design-pro/api';
 import { Alert, message, Tabs } from 'antd';
 import { FormattedMessage, history, SelectLang, useIntl, useModel, Helmet } from '@umijs/max';
 
@@ -53,7 +53,7 @@ const _columns: ProColumns[] = [
 
 
 
-const FinishedTradeList = ()=> {
+const AllFinishedTradeList = ()=> {
   
 
   return (
@@ -71,7 +71,7 @@ const FinishedTradeList = ()=> {
     }
     const values ={userid:parseInt(_id as string)} as API.UseridParams
 
-    const msg = await getFinishedTradeHist(values, params);
+    const msg = await getAllFinishedTradeHist(values, params);
     console.log(typeof(msg))
     console.log(msg)
     return msg 
@@ -83,4 +83,4 @@ const FinishedTradeList = ()=> {
 
 
 
-export default FinishedTradeList;
+export default AllFinishedTradeList;

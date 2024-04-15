@@ -83,6 +83,25 @@ export async function getPendingOrderHist(
 }
 
 /** 获取已完成交易列表  */
+export async function getAllFinishedTradeHist(
+  body: API.UseridParams,
+  params: {
+    // query
+    /** 页面的容量 */
+    // pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request('/api/allFinishedTradeList/', {
+    method: 'POST',
+    params: {
+      // ...params,
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+/** 获取已完成交易列表  */
 export async function getFinishedTradeHist(
   body: API.UseridParams,
   params: {
@@ -92,7 +111,7 @@ export async function getFinishedTradeHist(
   },
   options?: { [key: string]: any },
 ) {
-  return request('/api/finishedTradeHist/', {
+  return request('/api/finishedTradeList/', {
     method: 'POST',
     params: {
       // ...params,

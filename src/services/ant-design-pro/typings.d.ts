@@ -111,9 +111,11 @@ declare namespace API {
 
   type FinishedTradeListItem = {
     buyerName?: string;
+    buyerId?:number;
+    sellerId?:number;
     sellerName?: string;
-    qty: number;
-    price: number;
+    qty?: number;
+    price?: number;
     productName?:string;
   };
   type PendingOrderListItem = {
@@ -121,8 +123,8 @@ declare namespace API {
     orderId?:number;
     orderDst?: string;
     orderType?: string;
-    qty: number;
-    price: number;
+    qty?: number;
+    price?: number;
     productName?:string;
   };
 
@@ -131,8 +133,9 @@ declare namespace API {
     orderDst?: string;
     orderType?: string;
     orderIsDone?:number;
-    qty: number;
-    price: number;
+    qty?: number;
+    origQty?:number;
+    price?: number;
     productName?:string;
   };
 

@@ -72,6 +72,10 @@ const StockerOrderList= () => {
     //   // valueType: 'date',
     // },
     {
+      title: 'id',
+      dataIndex: 'orderId',
+    },
+    {
       title: '',
       dataIndex: 'orderDst',
       render: (text, record, _, action) => [
@@ -90,11 +94,18 @@ const StockerOrderList= () => {
       dataIndex: 'orderType',
       // key:'orderType',
     },
+
     {
-      title: '数量',
+      title: '初始数量',
+      dataIndex: 'origQty',
+      // key: 'qty',
+    },
+    {
+      title: '当前数量',
       dataIndex: 'qty',
       // key: 'qty',
     },
+    
     {
       title: '价格',
       dataIndex: 'price',
@@ -108,7 +119,7 @@ const StockerOrderList= () => {
       // key: 'orderState',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
-          {record.orderType=="cancel"?"已取消":"进行中"}
+          {record.orderType=="cancel"?"已取消":record.orderIsDone?"已完成":"进行中"}
         </p>,
         <a onClick={async() => {
           

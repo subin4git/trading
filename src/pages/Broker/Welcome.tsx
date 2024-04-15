@@ -2,7 +2,7 @@ import { PageContainer } from '@ant-design/pro-components';
 import { useModel } from '@umijs/max';
 import { Card, theme } from 'antd';
 import React from 'react';
-import FinishedTradeList from './components/FinishedTradeList'
+import AllFinishedTradeList from './components/AllFinishedTradeList'
 import PendingOrderList from './components/PendingOrderList';
 import { Button, Flex, Typography } from 'antd';
 
@@ -47,7 +47,7 @@ const Welcome: React.FC = () => {
               : 'background-image: linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
         }}
       >
-         <FinishedTradeList/>
+         <AllFinishedTradeList/>
         </Card>
         </Flex>
     </PageContainer>

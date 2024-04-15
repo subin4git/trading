@@ -5,7 +5,7 @@ import React from 'react';
 import { Button, Flex, Typography } from 'antd';
 import OrderForm from './components/OrderForm'
 import StockerOrderHist from './components/StockerOrderHist';
-import PendingOrderList from '../Broker/components/PendingOrderList';
+import FinishedTradeList from './components/FinishedTradeList';
 
 /**
  * 每个单独的卡片，为了复用样式抽成了组件
@@ -142,7 +142,7 @@ const Welcome: React.FC = () => {
               : 'background-image: linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
         }}
       >
-          <PendingOrderList/>
+          <FinishedTradeList/>
         </Card>
       </Flex>
       
