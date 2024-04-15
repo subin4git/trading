@@ -8,6 +8,7 @@ import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 import { currentUser, currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
 import React from 'react';
+import { waitTime } from './pages/Stocker/components/StockerOrderHist';
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
@@ -23,9 +24,10 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo = async () => {
     try {
-      
+      const { location } = history;
       const userName = window.localStorage.getItem("username")
-      if(location.pathname === '/' || !userName) {
+      if((location.pathname === '/' || !userName)) {
+        console.log(location.pathname, userName)
         history.push(loginPath);
         return
       }
@@ -38,6 +40,7 @@ export async function getInitialState(): Promise<{
       });
       return msg.data;
     } catch (error) {
+      console.log("r2")
       history.push(loginPath);
     }
     return undefined;
@@ -75,6 +78,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       const { location } = history;
       // 如果没有登录，重定向到 login
       if (!initialState?.currentUser && location.pathname !== loginPath) {
+        console.log("r3")
         history.push(loginPath);
       }
     },

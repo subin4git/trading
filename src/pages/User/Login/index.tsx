@@ -22,6 +22,8 @@ import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
 import { createStyles } from 'antd-style';
 
+import { waitTime } from '../../Stocker/components/StockerOrderHist';
+
 const useStyles = createStyles(({ token }) => {
   return {
     action: {
@@ -128,6 +130,8 @@ const Login: React.FC = () => {
         window.localStorage.setItem("username",values.username?values.username:"");
         window.localStorage.setItem("usertype",type);
         window.localStorage.setItem("userid",String(msg?.data?.userid));
+
+        await waitTime(500)
         await fetchUserInfo();
         
         history.push('/'+type+'/welcome');
@@ -136,6 +140,11 @@ const Login: React.FC = () => {
       console.log(msg);
       // 如果失败去设置用户错误信息
       setUserLoginState(msg);
+      const defaultLoginFailureMessage = intl.formatMessage({
+        id: 'pages.login.failure',
+        defaultMessage: '登录失败，请重试！',
+      });
+      message.error(defaultLoginFailureMessage);
     } catch (error) {
       const defaultLoginFailureMessage = intl.formatMessage({
         id: 'pages.login.failure',
