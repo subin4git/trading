@@ -129,7 +129,7 @@ const Welcome: React.FC = () => {
         </Card>
         </Flex>
         <Card 
-        title="进行中的订单"
+        title="订单交易历史列表"
         style={{
           flex:5,
           borderRadius: 2,

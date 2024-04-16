@@ -160,6 +160,7 @@ const StockerOrderList= () => {
         console.log(msg)
         return msg 
       }}
+      
       // editable={{
       //   type: 'multiple',
       // }}

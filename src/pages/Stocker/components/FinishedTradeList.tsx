@@ -115,6 +115,7 @@ const FinishedTradeList = ()=> {
       // search={{
       //   labelWidth: 'auto',
       // }}
+      
       search={false}
       options={{
         setting: {
