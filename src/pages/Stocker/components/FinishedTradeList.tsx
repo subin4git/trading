@@ -45,12 +45,12 @@ const FinishedTradeList = ()=> {
    
     {
       title: '',
-      dataIndex: 'orderId',
-      key: 'orderId',
+      dataIndex: 'buyOrderId',
+      key: 'buyOrderId',
       // key: 'orderState',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
-          {username==record.buyerName?("订单"+record.orderId+" 买入"):("订单"+record.orderId+" 卖出")}
+          {username==record.buyerName?("订单"+record.buyOrderId+" 买入"):("订单"+record.sellOrderId+" 卖出")}
         </p>
       ],
     },
@@ -61,7 +61,7 @@ const FinishedTradeList = ()=> {
       // key: 'orderState',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
-          {username==record.buyerName?record.sellerName:record.buyerName}
+          {username==record.buyerName?(record.sellerName+"(卖家)"):(record.buyerName+"(买家)")}
         </p>
       ],
     },
