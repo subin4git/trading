@@ -110,6 +110,7 @@ declare namespace API {
   };
 
   type FinishedTradeListItem = {
+    orderId?: number;
     buyerName?: string;
     buyerId?:number;
     sellerId?:number;
