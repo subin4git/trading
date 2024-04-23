@@ -125,7 +125,9 @@ declare namespace API {
     orderId?:number;
     orderDst?: string;
     orderType?: string;
+    orderIsDone?:number;
     qty?: number;
+    originVol?:number;
     price?: number;
     productName?:string;
   };

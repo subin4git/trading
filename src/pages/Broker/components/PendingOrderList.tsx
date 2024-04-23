@@ -47,7 +47,12 @@ const _columns: ProColumns[] = [
     key: 'productName',
   },
   {
-    title: '数量',
+    title: '初始数量',
+    dataIndex: 'originVol',
+    key: 'originVol',
+  },
+  {
+    title: '当前数量',
     dataIndex: 'qty',
     key: 'qty',
   },
@@ -55,6 +60,17 @@ const _columns: ProColumns[] = [
     title: '单价',
     dataIndex: 'price',
     key: 'price',
+  },
+
+  {
+    title: '状态',
+    dataIndex: 'orderState',
+    key: 'orderState',
+    render: (text, record, _, action) => [
+      <p style={{display:"inline"}}>
+        {record.orderType=="cancel"?"已取消":record.orderIsDone?"已完成":"进行中"}
+      </p>
+    ],
   },
   
 ];
