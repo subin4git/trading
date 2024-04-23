@@ -50,7 +50,7 @@ const FinishedTradeList = ()=> {
       // key: 'orderState',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
-          {username==record.buyerName?("订单"+record.orderId+" 买入"):(record.orderId+" 卖出")}
+          {username==record.buyerName?("订单"+record.orderId+" 买入"):("订单"+record.orderId+" 卖出")}
         </p>
       ],
     },
