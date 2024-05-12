@@ -38,6 +38,21 @@ const MarketDepth = ()=> {
     
         const msg = await getMarketDepth(values, {});
         console.log("getMarketDepth",msg)
+
+        while(msg.data.buyDepth.length > msg.data.sellDepth.length){
+          msg.data.sellDepth.push({
+            price:"-",
+            sellVol:"-",
+            level:"-"
+          })
+        }
+        while(msg.data.sellDepth.length > msg.data.buyDepth.length){
+          msg.data.buyDepth.push({
+            price:"-",
+            buyVol:"-",
+            level:"-"
+          })
+        }
         setDataBuy(msg.data.buyDepth)
         setDataSell(msg.data.sellDepth)
         setUnit({

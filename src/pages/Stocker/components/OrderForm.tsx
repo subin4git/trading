@@ -100,7 +100,7 @@ import PubSub from 'pubsub-js'
         <Flex align="center">
         <span style={{fontSize:"medium", fontWeight:"bold"}} >请选择订单商品</span>
         <Button icon={<ReloadOutlined />} type="text" style={{marginLeft:"20px"}}
-        onClick={
+        onClick={e=>
           PubSub.publish("productChanged")
         } >
             刷新商品信息

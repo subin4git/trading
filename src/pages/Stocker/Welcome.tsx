@@ -95,16 +95,16 @@ const InfoCard: React.FC<{
 const Welcome: React.FC = () => {
   const { token } = theme.useToken();
   const { initialState } = useModel('@@initialState');
-  const [autoReload, setAutoReload] = useState(0);
+  const [autoReload, setAutoReload] = useState(1);
   const doSomething = ()=> {
     // console.log("timeout")
     PubSub.publish("reloadData")
-    if(autoReload==1) setTimeout(doSomething, 10000);
+    if(autoReload==1) setTimeout(doSomething, 1000);
   }
 
     // 类似于类组件中的 componentDidMount
 	React.useEffect(() => {
-		setTimeout(doSomething, 10000);
+		setTimeout(doSomething, 1000);
 	}, []);
 
 	// 类似于类组价中 componentWillUnmout
