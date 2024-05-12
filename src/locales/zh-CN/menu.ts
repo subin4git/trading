@@ -7,6 +7,7 @@ export default {
   'menu.login': '登录',
   'menu.stocker': '企业',
   'menu.stocker.welcome': '操作页',
+  'menu.stocker.userhist': '历史订单',
   'menu.broker': '经纪人',
   'menu.broker.welcome': '操作页',
   'menu.register': '注册',

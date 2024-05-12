@@ -37,6 +37,12 @@ export default [
         icon: 'smile',
         component: './Stocker/Welcome',
       },
+      {
+        path: '/stocker/userhist',
+        name: 'userhist',
+        icon: 'smile',
+        component: './Stocker/UserHist',
+      },
     ]
   },
   {
@@ -52,6 +58,7 @@ export default [
         icon: 'smile',
         component: './Broker/Welcome',
       },
+      
     ]
   },
   

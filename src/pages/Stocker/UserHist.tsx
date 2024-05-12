@@ -3,12 +3,9 @@ import { useModel } from '@umijs/max';
 import { Card, theme } from 'antd';
 import React from 'react';
 import { Button, Flex, Typography } from 'antd';
-import OrderForm from './components/OrderForm';
-import PriceLineChart from './components/PriceLineChart';
-import MarketDepth from './components/MarketDepth';
-import PubSub from 'pubsub-js'
-
-import  { useState, useEffect } from 'react';
+import OrderForm from './components/OrderForm'
+import StockerOrderHist from './components/StockerOrderHist';
+import FinishedTradeList from './components/FinishedTradeList';
 
 /**
  * 每个单独的卡片，为了复用样式抽成了组件
@@ -24,8 +21,6 @@ const InfoCard: React.FC<{
   const { useToken } = theme;
 
   const { token } = useToken();
-
-  
 
   return (
     <div
@@ -95,25 +90,6 @@ const InfoCard: React.FC<{
 const Welcome: React.FC = () => {
   const { token } = theme.useToken();
   const { initialState } = useModel('@@initialState');
-  const [autoReload, setAutoReload] = useState(0);
-  const doSomething = ()=> {
-    // console.log("timeout")
-    PubSub.publish("reloadData")
-    if(autoReload==1) setTimeout(doSomething, 10000);
-  }
-
-    // 类似于类组件中的 componentDidMount
-	React.useEffect(() => {
-		setTimeout(doSomething, 10000);
-	}, []);
-
-	// 类似于类组价中 componentWillUnmout
-	React.useEffect(() => {
-		// 组件卸载移除监听
-		return () => { 
-			setAutoReload(0)
-		}
-	});
   return (
     <PageContainer ghost
     header={{
@@ -121,44 +97,26 @@ const Welcome: React.FC = () => {
       breadcrumb: {},
     }}>
       <Flex justify="center" align='stretch' gap={8}  >
-        <Flex vertical align="stretch" justify="space-between" gap={8} flex={7} style={{ padding: 2 }}>
-        
-        <Card
-        style={{
-          flex: 1,
-          borderRadius: 2,
-        }}
-        bodyStyle={{
-          backgroundImage:
-            initialState?.settings?.navTheme === 'realDark'
-              ? 'background-image: linear-gradient(75deg, #1A1B1F 0%, #191C1F 100%)'
-              : 'background-image: linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
-        }}
-      >
-        <OrderForm/>
-        </Card>
+  
             <Card
         style={{
-          flex:1,
+          flex:10,
           borderRadius: 2,
         }}
-        
+        title="订单交易历史列表"
         bodyStyle={{
           backgroundImage:
             initialState?.settings?.navTheme === 'realDark'
               ? 'background-image: linear-gradient(75deg, #1A1B1F 0%, #191C1F 100%)'
               : 'background-image: linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
         }}
-        title="价格趋势"
       >
-       
-        <PriceLineChart/> 
+        <StockerOrderHist></StockerOrderHist>
         </Card>
-        </Flex>
         <Card 
-        title="市场深度"
+        title="订单交易历史列表"
         style={{
-          flex:6,
+          flex:9,
           borderRadius: 2,
           padding: 2
         }}
@@ -169,7 +127,7 @@ const Welcome: React.FC = () => {
               : 'background-image: linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
         }}
       >
-        <MarketDepth/>
+          <FinishedTradeList/>
         </Card>
       </Flex>
       

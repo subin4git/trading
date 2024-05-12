@@ -94,7 +94,9 @@ const StockerOrderList= () => {
           }
           const values ={
             userid:parseInt(_id as string),
-            orderId:record.orderId
+            orderId:record.orderId,
+            orderDst:record.orderDst,
+            productName:record.productName
           } as API.CancelOrderParams
   
           const msg = await cancelOrder(values, {});
@@ -200,8 +202,9 @@ const StockerOrderList= () => {
         pageSize: 5,
         onChange: (page) => console.log(page),
       }}
+
+      
       dateFormatter="string"
-      headerTitle="历史订单"
       // toolBarRender={() => [
         
       // ]}

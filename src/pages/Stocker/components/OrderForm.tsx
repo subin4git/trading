@@ -9,13 +9,15 @@ import {
     ProFormDigit,
   } from '@ant-design/pro-components';
   import { Card, theme } from 'antd';
+  import { ReloadOutlined } from '@ant-design/icons';
+
   import { useState } from 'react';
   import { useRef } from 'react';
 import { request } from '@umijs/max';
-import { makeOrder } from '@/services/ant-design-pro/api';
+import { getProductInfo, getProductList, makeOrder } from '@/services/ant-design-pro/api';
 import { Alert, message, Tabs } from 'antd';
 import { FormattedMessage, history, SelectLang, useIntl, useModel, Helmet } from '@umijs/max';
-
+import { Button, Flex} from 'antd';
 import React from 'react';
 import PubSub from 'pubsub-js'
 
@@ -28,12 +30,32 @@ import PubSub from 'pubsub-js'
   };
   
  const OrderForm= () => {
+  
   const { useToken } = theme;
 
   const { token } = useToken();
   const [orderType, setOrderType] = useState<string>('limit');
 
-  
+  const [unit, setUnit] = useState<object>();
+  const asyncFetchUnit = async () => {
+    const productName = window.localStorage.getItem("productName");
+    const values ={name:(productName as string)} as API.ProductParams
+    
+        const msg = await getProductInfo(values, {});
+        console.log("getProductInfo",msg)
+        setUnit({
+          qty:msg.data.qtyUnit ,
+          price:msg.data.priceUnit
+        })
+        window.localStorage.setItem("productQrtUnit", msg.data.qtyUnit as string);
+        window.localStorage.setItem("productPriceUnit", msg.data.priceUnit as string);
+  };
+
+	// 类似于类组件中的 componentDidMount
+	React.useEffect(() => {
+    asyncFetchUnit()
+	}, []);
+
 
     return (
       <ProForm
@@ -74,8 +96,46 @@ import PubSub from 'pubsub-js'
         }}
        
       >
-        <strong style={{fontSize:"24px"}}>订单</strong>
-        <ProForm.Group style={{marginTop: '16px'}}>
+        <Flex align="center">
+        <span style={{fontSize:"medium", fontWeight:"bold"}} >请选择订单商品</span>
+        <Button icon={<ReloadOutlined />} type="text" style={{marginLeft:"20px"}}
+        onClick={
+          PubSub.publish("productChanged")
+        } >
+            刷新商品信息
+          </Button>
+              </Flex>
+        <ProFormSelect
+                request={async () => {
+                  var _id = window.localStorage.getItem("userid")
+        if(!_id) {
+    
+        }
+        const values ={userid: parseInt(_id as string)} as API.UseridParams
+    
+                  const msg = await getProductList(values, {});
+        console.log("getProductList",msg)
+
+            
+                 const list = msg.data.map((item:API.ProductListItem) => ({
+                    label: item.productName,
+                    value: item.productName,
+                  }));
+                  console.log("getProductList list",list)
+                  return list
+                }}
+                width="sm"
+                name="productName"
+                style={{marginTop: '16px'}}
+                fieldProps={{ onSelect: async (e) => {
+                  window.localStorage.setItem("productName", e as string);
+                  await asyncFetchUnit()
+                  PubSub.publish("productChanged", e as string)
+                }}}
+              />
+              
+        <ProForm.Group style={{marginTop: '0px'}}>
+        
         <ProFormRadio.Group
         width="md"
         name="orderDst"
@@ -120,32 +180,16 @@ import PubSub from 'pubsub-js'
           },
         ]}
         />
-        </ProForm.Group>
-        <ProForm.Group>
-        <ProFormSelect
-                options={[
-                  {
-                    value: 'gold',
-                    label: 'gold',
-                  },
-                  {
-                    value: 'oil',
-                    label: 'oil',
-                  },
-                ]}
-                width="sm"
-                name="productName"
-                label="商品"
-              />
+        
         
         <ProFormDigit
-            label="数量"
+            label={"数量"+(unit?'/'+unit.qty:'')}
             name="qty"
             width="xs"
             min={1}
             max={100}
           />
-          <ProFormDigit label="单价" name="price"  width="xs" hidden={orderType=='market'}/>
+          <ProFormDigit label={"单价"+(unit?'/'+unit.price:'')} name="price"  width="xs" hidden={orderType=='market'}/>
         </ProForm.Group>
         
       </ProForm>

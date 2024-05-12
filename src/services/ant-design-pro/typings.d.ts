@@ -99,6 +99,8 @@ declare namespace API {
   type CancelOrderParams = {
     userid?:number;
     orderId?:number;
+    orderDst?:string;
+    productName?:string;
   };
   type MakeOrderParams = {
     userid?:number;
@@ -108,7 +110,30 @@ declare namespace API {
     qty?:number;
     price?:number;
   };
+  type ProductParams = {
+    name?:string;
+    beginTime?:string;
+    endTime?:string;
+  };
 
+  type ProductListItem = {
+    productName?:string;
+  };
+  type PriceTrendItem = {
+    price?:number;
+    qty?:number;
+    time?:string;
+  };
+  type BuyDepthItem = {
+    price?:number;
+    buyVol?:number;
+    level?:number;
+  };
+  type SellDepthItem = {
+    price?:number;
+    sellVol?:number;
+    level?:number;
+  };
   type FinishedTradeListItem = {
     buyOrderId?: number;
     sellOrderId?: number;

@@ -142,6 +142,87 @@ export async function getStockerOrderHist(
   });
 }
 
+/** 获取  */
+export async function getProductList(
+  body: API.UseridParams,
+  params: {
+    // query
+    /** 页面的容量 */
+    // pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request('/api/productList/', {
+    method: 'POST',
+    params: {
+      // ...params,
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** 获取  */
+export async function getProductInfo(
+  body: API.ProductParams,
+  params: {
+    // query
+    /** 页面的容量 */
+    // pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request('/api/getProductInfo/', {
+    method: 'POST',
+    params: {
+      // ...params,
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** 获取  */
+export async function getPriceTrend(
+  body: API.ProductParams,
+  params: {
+    // query
+    /** 页面的容量 */
+    // pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request('/api/getPriceTrend/', {
+    method: 'POST',
+    params: {
+      // ...params,
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** 获取  */
+export async function getMarketDepth(
+  body: API.ProductParams,
+  params: {
+    // query
+    /** 页面的容量 */
+    // pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request('/api/getMarketDepthByName/', {
+    method: 'POST',
+    params: {
+      // ...params,
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+
 /** 获取规则列表 GET /api/rule */
 export async function rule(
   params: {
