@@ -38,7 +38,8 @@ import PubSub from 'pubsub-js'
 
   const [unit, setUnit] = useState<object>();
   const asyncFetchUnit = async () => {
-    const productName = window.localStorage.getItem("productName");
+    const _ = window.localStorage.getItem("productName");
+    const productName = _?_:"gold"
     const values ={name:(productName as string)} as API.ProductParams
     
         const msg = await getProductInfo(values, {});

@@ -11,7 +11,8 @@ const PriceLineChart = () => {
 
 
   const asyncFetch = async () => {
-    const productName = window.localStorage.getItem("productName");
+    const _ = window.localStorage.getItem("productName");
+    const productName = _?_:"gold"
         if(!productName) {
     
         }

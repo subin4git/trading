@@ -29,7 +29,8 @@ const MarketDepth = ()=> {
   const [unit, setUnit] = useState<object>();
 
   const asyncFetch = async () => {
-    const productName = window.localStorage.getItem("productName");
+    const _ = window.localStorage.getItem("productName");
+    const productName = _?_:"gold"
         if(!productName) {
     
         }
