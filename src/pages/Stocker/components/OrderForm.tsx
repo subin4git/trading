@@ -188,7 +188,7 @@ import PubSub from 'pubsub-js'
             name="qty"
             width="xs"
             min={1}
-            max={100}
+            max={1000000}
           />
           <ProFormDigit label={"单价"+(unit?'/'+unit.price:'')} name="price"  width="xs" hidden={orderType=='market'}/>
         </ProForm.Group>
