@@ -39,14 +39,17 @@ const MarketDepth = ()=> {
         const msg = await getMarketDepth(values, {});
         console.log("getMarketDepth",msg)
 
-        while(msg.data.buyDepth.length > msg.data.sellDepth.length){
+        var len = Math.max(msg.data.buyDepth.length, msg.data.sellDepth.length)
+        len = len%10==0? len:((len/10+1)*10-1)
+         
+        while(len > msg.data.sellDepth.length){
           msg.data.sellDepth.push({
             price:"-",
             sellVol:"-",
             level:"-"
           })
         }
-        while(msg.data.sellDepth.length > msg.data.buyDepth.length){
+        while(len > msg.data.buyDepth.length){
           msg.data.buyDepth.push({
             price:"-",
             buyVol:"-",
@@ -197,6 +200,10 @@ const MarketDepth = ()=> {
       pagination={{
         pageSize: 10,
         onChange: (page) => console.log(page),
+        showSizeChanger: false,
+        // showLessItems: true,
+        showTitle: false,
+        showTotal: (total, range) => ``
       }}
       dateFormatter="string"
     />
@@ -234,6 +241,10 @@ const MarketDepth = ()=> {
       pagination={{
         pageSize: 10,
         onChange: (page) => console.log(page),
+        showSizeChanger: false,
+        // showLessItems: true,
+        showTitle: false,
+        showTotal: (total, range) => ``
       }}
       dateFormatter="string"
     />

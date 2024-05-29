@@ -135,6 +135,7 @@ declare namespace API {
     level?:number;
   };
   type FinishedTradeListItem = {
+    _id?: number;
     buyOrderId?: number;
     sellOrderId?: number;
     buyerName?: string;

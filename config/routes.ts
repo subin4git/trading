@@ -58,6 +58,12 @@ export default [
         icon: 'smile',
         component: './Broker/Welcome',
       },
+      {
+        path: '/broker/ordermanage',
+        name: 'ordermanage',
+        icon: 'smile',
+        component: './Broker/OrderManage',
+      },
       
     ]
   },

@@ -44,13 +44,13 @@ const FinishedTradeList = ()=> {
     // },
    
     {
-      title: '',
-      dataIndex: 'buyOrderId',
-      key: 'buyOrderId',
+      title: '订单号',
+      dataIndex: '_id',
+      key: '_id',
       // key: 'orderState',
       render: (text, record, _, action) => [
         <p style={{display:"inline"}}>
-          {username==record.buyerName?("订单"+record.buyOrderId+" 买入"):("订单"+record.sellOrderId+" 卖出")}
+          {username==record.buyerName?("订单"+record._id+" 买入"):("订单"+record._id+" 卖出")}
         </p>
       ],
     },
@@ -69,11 +69,13 @@ const FinishedTradeList = ()=> {
       title: '成交量',
       dataIndex: 'qty',
       key: 'qty',
+      search: false
     },
     {
       title: '成交价',
       dataIndex: 'price',
       key: 'price',
+      search: false
     },
     {
       title: '产品名',
@@ -94,6 +96,9 @@ const FinishedTradeList = ()=> {
         const values ={userid: parseInt(_id as string)} as API.UseridParams
     
         const msg = await getFinishedTradeHist(values, params);
+        msg.data.forEach((record: any, i: any) => {
+          record._id = username==record.buyerName?record.buyOrderId:record.sellOrderId
+        });
         console.log(typeof(msg))
         console.log(msg)
         return msg
@@ -128,6 +133,8 @@ const FinishedTradeList = ()=> {
         onChange: (page) => console.log(page),
       }}
       dateFormatter="string"
+
+      
     />
   );
 }

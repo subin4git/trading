@@ -168,6 +168,8 @@ const Welcome: React.FC = () => {
               ? 'background-image: linear-gradient(75deg, #1A1B1F 0%, #191C1F 100%)'
               : 'background-image: linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
         }}
+        // 一克 一盎司
+        // broker:订单分析&用户分析(抽佣)
       >
         <MarketDepth/>
         </Card>

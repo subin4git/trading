@@ -87,7 +87,7 @@ const InfoCard: React.FC<{
   );
 };
 
-const Welcome: React.FC = () => {
+const UserHist: React.FC = () => {
   const { token } = theme.useToken();
   const { initialState } = useModel('@@initialState');
   return (
@@ -135,4 +135,4 @@ const Welcome: React.FC = () => {
   );
 };
 
-export default Welcome;
+export default UserHist;
