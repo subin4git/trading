@@ -103,7 +103,7 @@ const UserHist: React.FC = () => {
           flex:10,
           borderRadius: 2,
         }}
-        title="订单交易历史列表"
+        title="订单历史"
         bodyStyle={{
           backgroundImage:
             initialState?.settings?.navTheme === 'realDark'
@@ -114,9 +114,9 @@ const UserHist: React.FC = () => {
         <StockerOrderHist></StockerOrderHist>
         </Card>
         <Card 
-        title="订单交易历史列表"
+        title="订单交易历史"
         style={{
-          flex:9,
+          flex:8,
           borderRadius: 2,
           padding: 2
         }}
