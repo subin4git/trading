@@ -351,11 +351,11 @@ const StockerOrderList= () => {
           },
         },
       }}
-      // onRow={(record, rowIndex) => {
-      //   return {
-      //     onClick: event => {PubSub.publish("histSelectId", record.orderId)}, // click row
-      //   };
-      // }}
+      onRow={(record, rowIndex) => {
+        return {
+          onClick: event => {PubSub.publish("histSelectId", record.orderId)}, // click row
+        };
+      }}
 
       
       dateFormatter="string"

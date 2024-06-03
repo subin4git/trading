@@ -21,6 +21,10 @@ import  { useState, useEffect } from 'react';
 
 
 const MarketDepth = ()=> {
+  
+  const [priceMin, setPriceMin] = useState<number>(500);
+  const [priceSellMin, setPriceSellMin] = useState<number>(500);
+  const [priceBuyMax, setPriceBuyMax] = useState<number>(500);
   const [dataBuy, setDataBuy] = useState<Array<API.BuyDepthItem>>([]);
   const [dataSell, setDataSell] = useState<Array<API.SellDepthItem>>([]);
 
@@ -40,8 +44,11 @@ const MarketDepth = ()=> {
         console.log("getMarketDepth",msg)
 
         var len = Math.max(msg.data.buyDepth.length, msg.data.sellDepth.length)
-        len = len%10==0? len:((len/10+1)*10-1)
-         
+        len = len%10==0? len:((len/10+1)*10-2)
+        
+        setPriceBuyMax(msg.data.buyDepth[0].price)
+        setPriceSellMin(msg.data.sellDepth[0].price)
+
         while(len > msg.data.sellDepth.length){
           msg.data.sellDepth.push({
             price:"-",
@@ -124,51 +131,53 @@ const MarketDepth = ()=> {
     },
   ];
 
-  // const configBuy = {
-  //   data: dataBuy.reverse(),
-  //   xField: 'level',
-  //   yField: 'price',
-  //   axis: { x: false, y: false},
-  //   style: {
-  //     fill: 'linear-gradient(-90deg, white 0%, darkgreen 100%)',
-  //   },
-  //   line: {
-  //     style: {
-  //       stroke: 'darkgreen',
-  //       strokeWidth: 2,
-  //     },
-  //   },
-  //   height: 200,
-  //   width:180,
-  //   margin:0
-  // };
+  const configBuy = {
+    data: dataBuy.filter(i=>i.level?.toString()!='-'),
+    xField: (d)=>(dataBuy.filter(i=>i.level?.toString()!='-').length - d.level),
+    yField: (d)=>(priceBuyMax - d.price),
+    axis: { x: false, y: false},
+    style: {
+      fill: 'linear-gradient(-90deg, white 0%, darkgreen 100%)',
+    },
+    line: {
+      style: {
+        stroke: 'darkgreen',
+        strokeWidth: 2,
+      },
+    },
+    tooltip: { channel: 'y', valueFormatter: (d) => priceBuyMax - d},
+    height: 120,
+    width:180,
+    margin:0
+  };
 
-  // const configSell = {
-  //   data: dataSell,
-  //   xField: 'level',
-  //   yField: (d)=>((d.price-dataSell[0].price)),
-  //   axis: { x: false, y: false},
-  //   style: {
-  //     fill: 'linear-gradient(-90deg, white 0%, darkred 100%)',
-  //   },
-  //   line: {
-  //     style: {
-  //       stroke: 'darkred',
-  //       strokeWidth: 2,
-  //     },
-  //   },
-  //   display: "none",
-  //   height: 200,
-  //   width:180,
-  //   margin:0
-  // };
+  const configSell = {
+    data: dataSell.filter(i=>i.level?.toString()!='-'),
+    xField: 'level',
+    yField: (d)=>(d.price - priceSellMin),
+    axis: { x: false, y: false },
+    style: {
+      fill: 'linear-gradient(-90deg, white 0%, darkred 100%)',
+    },
+    line: {
+      style: {
+        stroke: 'darkred',
+        strokeWidth: 2,
+      },
+    },
+    tooltip: { channel: 'y', valueFormatter: (d) => d+priceSellMin},
+    display: "none",
+    height: 120,
+    width:180,
+    margin:0
+  };
 
   return (
     <Flex justify="center" align='center' gap={0}  vertical>
-      {/* <Flex justify="center" align='stretch' gap={0}  >
+      <Flex justify="center" align='stretch' gap={0}  >
     <Area {...configBuy} />
     <Area {...configSell} />
-    </Flex> */}
+    </Flex>
     <Flex justify="center" align='stretch' gap={0}  >
     <ProTable<API.BuyDepthItem>
       columns={bidColumns}

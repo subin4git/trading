@@ -61,9 +61,8 @@ const FinishedTradeList = ()=> {
     const callback = () => {
       actionRef.current?.reload()
     }
-    const callback_id = (selectId:number) => {
-      console.log(selectId)
-      setSearchId([selectId.toString()]);
+    const callback_id = (name:any, data:number) => {
+      setSearchId([data.toString()]);
     }
   
     // 类似于类组件中的 componentDidMount
